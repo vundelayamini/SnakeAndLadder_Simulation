@@ -11,14 +11,8 @@ namespace snakeAndLadder
             Console.WriteLine("Please Enter Your Name.");
             string player1 = Console.ReadLine();
             int playerPosition =START_POSSITION;
-            Console.WriteLine("Current Position : " + playerPosition);
+            Console.WriteLine("Current Position : " + playerPosition)
         }
-        static int RollDice()
-        {
-            Random random = new Random();
-            int randomNumber = random.Next(1, 7);
-            return randomNumber;
-
-        }
-    }
+    }     
 }
+    
