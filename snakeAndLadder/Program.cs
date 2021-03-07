@@ -9,21 +9,23 @@ namespace snakeAndLadder
         public const int NO_PLAY = 0;
         public const int SNAKE = 1;
         public const int LADDER = 2;
-
+        string player1 = Console.ReadLine();
         static void Main(string[] args)
         {
             Console.WriteLine("Enter your name:");
             string player1 = Console.ReadLine();
-            int currentplayerPosition = START_POSSITION;
-            for (int noOfTimeDiceRolled = 1; currentplayerPosition >= 0; noOfTimeDiceRolled++)
+            int currentPositionOfPlayer = START_POSSITION;
+            for (int noOfTimesRoll = 1; currentPositionOfPlayer < 100; noOfTimesRoll++)
             {
                 int rollDice = RollDice();
-                Console.WriteLine("You Rolled:-" + rollDice);
-                currentplayerPosition = userMovement(rollDice, currentplayerPosition);
-                Console.WriteLine("Your position is:-" + currentplayerPosition);
-                if (currentplayerPosition >= 100)
+                Console.WriteLine("You rolled: " + rollDice);
+                currentPositionOfPlayer = PlayerMovement(rollDice, currentPositionOfPlayer);
+                Console.WriteLine("Your Current position: " + currentPositionOfPlayer);
+                Console.WriteLine("you rolled you dice total time from stating::" + noOfTimesRoll);
+
+                if (currentPositionOfPlayer == 100)
                 {
-                    Console.WriteLine("GAME OVER");
+                    Console.WriteLine("Game Over");
                     break;
                 }
                 Console.ReadLine();
@@ -32,38 +34,41 @@ namespace snakeAndLadder
         static int RollDice()
         {
             Random random = new Random();
-            int randomNumber = random.Next(1, 7);
-            return randomNumber;
+            int diceNumber = random.Next(1, 7);
+            return diceNumber;
         }
-        static int userMovement(int rolledNumber, int playerPosition)
+        static int PlayerMovement(int numbRolled, int playerpossition)
         {
             Random random = new Random();
             int move = random.Next(0, 3);
             switch (move)
             {
                 case NO_PLAY:
-                    Console.WriteLine("NO PLAY");
+                    Console.WriteLine("No _Play");
                     break;
                 case SNAKE:
-                    Console.WriteLine("SNAKE");
-                    if (playerPosition - rolledNumber >= 0)
+                    Console.WriteLine("snake");
+                    if (playerpossition - numbRolled >= 0)
                     {
-                        playerPosition = playerPosition - rolledNumber;
+                        playerpossition = playerpossition - numbRolled;
                         break;
                     }
                     else
                     {
-                        playerPosition = START_POSSITION;
+                        playerpossition = START_POSSITION;
                         break;
                     }
                 case LADDER:
-                    Console.WriteLine("LADDER");
-                    playerPosition = playerPosition + rolledNumber;
-                    break;
+                    Console.WriteLine("Ladder");
+                    if (playerpossition + numbRolled <= 100)
+                    {
+                        playerpossition = playerpossition + numbRolled;
+                        break;
+                    }
+                    else
+                        break;
             }
-            return playerPosition;
-
-
+            return playerpossition;
 
         }
     }
